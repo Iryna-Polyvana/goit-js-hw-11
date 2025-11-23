@@ -1,9 +1,10 @@
 import SimpleLightbox from "simplelightbox";
 // const simpleLightbox = new SimpleLightbox;
+let galleryLightbox;
 export const createGallery = values => {
 
-    const createGalleryCardTemplate = ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        return `<li class="gallery-item">
+  const createGalleryCardTemplate = ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
+    return `<li class="gallery-item">
   <a class="gallery-link" href="${largeImageURL}" target="_self" rel="noopener noreferrer">
     <img
       class="gallery-image"
@@ -32,18 +33,22 @@ export const createGallery = values => {
   </ul>
 </li>
 `
-    };
-    refs.galleryList.innerHTML = values.map(imgInfo => createGalleryCardTemplate(imgInfo)).join('');
-    let galleryLightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
+  };
+  refs.galleryList.innerHTML = values.map(imgInfo => createGalleryCardTemplate(imgInfo)).join('');
+
+  if (!galleryLightbox) {
+    galleryLightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
     });
+  } else {
     galleryLightbox.refresh();
+  }
 }
 
 const refs = {
-    galleryList: document.querySelector('.gallery'),
-    loader: document.querySelector('.loader'),
+  galleryList: document.querySelector('.gallery'),
+  loader: document.querySelector('.loader'),
 }
 export const clearGallery = () => { refs.galleryList.innerHTML = ''; };
 export const showLoader = () => { refs.loader.classList.remove('is-hidden'); };

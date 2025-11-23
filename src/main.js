@@ -25,15 +25,15 @@ const onSubmitForm = event => {
             hideLoader();
             searchForm.reset();
         })
-        .then(response => {
-            if (response.data.hits.length === 0) {
+        .then(images => {
+            if (images.length === 0) {
                 iziToast.info({
                     message: 'Sorry, there are no images matching your search query. Please try again!',
                     position: "topRight",
                 });
                 return;
             }
-            createGallery(response.data.hits);
+            createGallery(images);
         })
         .catch(err => {
             iziToast.error({

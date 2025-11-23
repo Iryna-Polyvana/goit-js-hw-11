@@ -8,7 +8,9 @@ export const getImagesByQuery = (query) => {
         orientation: 'horizontal',
         safesearch: true,
     });
-    return axios.get(`https://pixabay.com/api/?${requestParams}`);
+    return axios
+        .get(`https://pixabay.com/api/?${requestParams}`)
+        .then(response => response.data.hits);
 };
 
 

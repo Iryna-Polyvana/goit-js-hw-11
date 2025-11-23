@@ -13,6 +13,8 @@
 
 /* Loader styles */
 .loader {
+  margin-left: auto;
+  margin-right: auto;
   transform: rotateZ(45deg);
   perspective: 1000px;
   border-radius: 50%;
